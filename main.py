@@ -30,6 +30,14 @@ class Window(QMainWindow):
         super(Window, self).__init__()
         uic.loadUi("main.ui", self)
         self.table()
+        self.addInfoButton.clicked.connect(self.run)
+
+    def run(self) -> None:
+        sys.excepthook = except_hook
+        EDB = EditDB()
+        EDB.show()
+        EDB.exec()
+        self.table()
 
     def table(self) -> None:
         con = sqlite3.connect('coffee.sqlite')
